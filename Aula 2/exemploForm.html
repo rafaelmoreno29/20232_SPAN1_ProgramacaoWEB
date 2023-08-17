@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Form</title>
+</head>
+
+<body>
+    <h1>Cadastro de clientes</h1>
+    <form action="index.html" method="post">
+        <fieldset>
+            <legend>Dados Básicos</legend>
+            <div>
+                <label>Nome</label>
+                <input name="nome" required placeholder="Digite seu nome...">
+            </div>
+            <div>
+                <label for="altura">Altura</label>
+                <input id="altura" type="number" name="altura" min="0" max="3" step="0.01"
+                    placeholder="Digite sua altura...">
+            </div>
+            <div>
+                <label>Cor do cabelo</label>
+                <input type="color" name="corCabelo" placeholder="Cor do cabelo...">
+            </div>
+            <div>
+                <label>Data de nascimento</label>
+                <input type="date" name="dataNascimento" placeholder="Digite a data de nascimento...">
+            </div>
+            <div>
+                <label>E-mail</label>
+                <input type="email" name="email" required placeholder="Digite o e-mail...">
+            </div>
+            <div>
+                <label>Senha</label>
+                <input type="password" name="senha" required>
+            </div>
+            <div>
+                <label>Gênero</label>
+                <input id="feminino" type="radio" value="F" name="genero">
+                <label for="feminino">Feminino</label>
+                <input id="masculino" type="radio" value="M" name="genero">
+                <label for="masculino">Masculino</label>
+            </div>
+            <div>
+                <label>Gosta de:</label>
+                <input id="ler" type="checkbox" value="Ler" name="gosto">
+                <label for="ler">Ler</label>
+                <input id="filme" type="checkbox" value="Filme" name="gosto">
+                <label for="filme">Filme</label>
+                <input id="esporte" type="checkbox" value="Esporte" name="gosto">
+                <label for="esporte">Esporte</label>
+            </div>
+            <div>
+                <label>Upload RG</label>
+                <input type="file" name="rgUpload">
+            </div>
+            <div>
+                <label>Estado de nascimento</label>
+                <select name="estadoNascimento" placeholder="Selecione...">
+                    <optgroup label="Sudeste">
+                        <option value="SP">São Paulo</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                    </optgroup>
+                    <optgroup label="Sul">
+                        <option value="SC">Santa Catarina</option>
+                        <option value="PR">Paraná</option>
+                    </optgroup>
+
+                </select>
+            </div>
+            <div>
+                <button type="submit">Salvar</button>
+                <button type="reset">Limpar</button>
+            </div>
+        </fieldset>
+    </form>
+</body>
+
+</html>
