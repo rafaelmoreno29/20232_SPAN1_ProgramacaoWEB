@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container" id="teste">
+        <div class="row">
+            <div class="col-12">
+                <h1>Aula 7 - Javascript</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input class="form-control" id="txtNome">
+            </div>
+            <div class="col-2">
+                <button onclick="botaoOkClick()" class="btn btn-primary">OK</button>
+            </div>
+            <div class="col-4">
+                <input class="form-control" id="txtNome2">
+            </div>
+        </div>
+
+
+        <!-- EXERCÍCIO 5-->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label class="form-label">Num. 1</label>
+                    <input class="form-control" id="num1">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Operação</label>
+                <select class="form-select" id="operacao">
+                    <option value="+" selected>Somar</option>
+                    <option value="-">Subtrair</option>
+                    <option value="*">Multiplicar</option>
+                    <option value="/">Dividir</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label class="form-label">Num. 2</label>
+                    <input class="form-control" id="num2">
+                </div>
+            </div>
+            <div class="col-md-3" style="margin-top: 30px;">
+                <button class="btn btn-danger" onclick="calcular()">
+                    Calcular</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label class="form-label">Resultado</label>
+                    <input class="form-control" id="resultado">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        function calcular() {
+            let num1 = parseFloat(
+                document.getElementById("num1").value);
+            let num2 = parseFloat(
+                document.getElementById("num2").value);
+            let operacao = document.getElementById("operacao").value;
+            switch (operacao) {
+                case '+':
+                    document.getElementById("resultado").value =
+                        num1 + num2;
+                    break;
+                case '-':
+                    document.getElementById("resultado").value =
+                        num1 - num2;
+                    break;
+                case '*':
+                    document.getElementById("resultado").value =
+                        num1 * num2;
+                    break;
+                case '/':
+                    document.getElementById("resultado").value =
+                        num1 / num2;
+                    break;
+            }
+        }
+
+        function botaoOkClick() {
+            let nome = document.getElementById("txtNome").value;
+            document.getElementById("txtNome2").value = nome;
+
+            let container =
+                document.getElementById("teste");
+            container.style.background = "green";
+
+            // alert("FUNCIONOU O SCRIPT!!!" + nome);
+        }
+        console.log("Imprime no console...");
+    </script>
+</body>
+
+</html>
