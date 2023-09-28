@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aula 8</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <label for="pesquisar" class="form-label">
+                    Pesquisar</label>
+                <input type="text" class="form-control" id="pesquisar">
+            </div>
+            <div class="col-md-4" style="margin-top: 30px;">
+                <button class="btn btn-primary" type="button" onclick="pesquisar()"><i class="bi bi-search"></i>
+                    Pesquisar</button>
+                <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                    data-bs-target="#addUsuarioModal"><i class="bi bi-plus-lg"></i> Adicionar</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addUsuarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="formUsuario">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Usuário</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" name="nome">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="senha" name="senha">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var urlApi = "https://650b1f82dfd73d1fab099fbb.mockapi.io/api/v1/usuario";
+        var usuarios = [];
+
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("Carregou HTML e chamou a função");
+
+            document.getElementById("formUsuario")
+                .addEventListener("submit", function (f) {
+                    f.preventDefault();
+                    salvarUsuario(f);
+                });
+
+            obterUsuarios();
+        });
+        function salvarUsuario(form) {
+            let json = {
+                nome: form.target["nome"].value,
+                email: form.target["email"].value,
+                senha: form.target["senha"].value
+            };
+
+            fetch(urlApi, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(json)
+            }).then((response) => {
+                obterUsuarios();
+                alert("Salvo com sucesso!");
+            });
+        }
+        function obterUsuarios() {
+            fetch(urlApi).then((response) => response.json()
+                .then((data) => {
+                    console.log(data);
+                    usuarios = data;
+                    atualizarTabela(usuarios);
+                }));
+        }
+        function pesquisar() {
+            let pesquisar = document.getElementById("pesquisar").value;
+
+            let array = usuarios.filter(usu =>
+                usu.nome.includes(pesquisar) || usu.email.includes(pesquisar));
+
+            atualizarTabela(array);
+        }
+        function atualizarTabela(array) {
+            let tbody = document.getElementById("tbody");
+            tbody.innerHTML = "";
+            array.forEach(usu => {
+                let tr = document.createElement("tr");
+                let tdId = document.createElement("td");
+                tdId.innerHTML = usu.id;
+                let tdNome = document.createElement("td");
+                tdNome.innerHTML = usu.nome;
+                let tdEmail = document.createElement("td");
+                tdEmail.innerHTML = usu.email;
+                tr.appendChild(tdId);
+                tr.appendChild(tdNome);
+                tr.appendChild(tdEmail);
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+
+</html>
