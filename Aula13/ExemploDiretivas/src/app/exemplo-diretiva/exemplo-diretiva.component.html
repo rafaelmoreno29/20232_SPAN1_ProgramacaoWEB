@@ -1,0 +1,28 @@
+<h1>Exemplo Diretivas</h1>
+
+<input id="mostrar" type="checkbox" [(ngModel)]="mostrarTabela" />
+<label for="mostrar">Mostrar Tabela?</label>
+
+<table *ngIf="mostrarTabela">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Cidade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listaPessoa">
+      <td>{{ item.id }}</td>
+      <td>{{ item.nome }}</td>
+      <td
+        [ngClass]="{
+          sorocaba: item.cidade == 'Sorocaba',
+          votorantim: item.cidade == 'Votorantim'
+        }"
+      >
+        {{ item.cidade }}
+      </td>
+    </tr>
+  </tbody>
+</table>
