@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">Inserir Usuário</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<form #form="ngForm" (ngSubmit)="salvar(form)">
+  <div class="modal-body">
+    <label class="form-label">Nome</label>
+    <input class="form-control" name="nome" ngModel />
+    <label class="form-label">E-mail</label>
+    <input class="form-control" name="email" ngModel />
+    <label class="form-label">Senha</label>
+    <input class="form-control" name="senha" ngModel type="password" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="submit">Salvar</button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="activeModal.close('Close click')"
+    >
+      Fechar
+    </button>
+  </div>
+</form>

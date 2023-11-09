@@ -13,6 +13,9 @@ import { TelaPaiComponent } from './tela-pai/tela-pai.component';
 import { HomeComponent } from './home/home.component';
 import { TelaFilho1Component } from './tela-pai/tela-filho1/tela-filho1.component';
 import { TelaFilho2Component } from './tela-pai/tela-filho2/tela-filho2.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UsuarioDetalhesComponent } from './usuario/usuario-detalhes/usuario-detalhes.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +28,16 @@ import { TelaFilho2Component } from './tela-pai/tela-filho2/tela-filho2.componen
     HomeComponent,
     TelaFilho1Component,
     TelaFilho2Component,
+    UsuarioComponent,
+    UsuarioDetalhesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
